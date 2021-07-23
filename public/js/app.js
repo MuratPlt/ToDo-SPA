@@ -24,29 +24,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       Nutzdaten: [],
-      fields: ['todo', 'löschen']
+      fields: ['todo', 'löschen'],
+      newitem: ""
     };
   },
   created: function created() {
     var _this = this;
 
     axios.get('http://127.0.0.1:8000/api/todos/').then(function (response) {
-      console.log(response.data); // DEBUG
-
       _this.Nutzdaten = response.data;
     })["catch"](function (error) {
       console.log(error);
     });
   },
   methods: {
-    delItem: function delItem(id) {
+    delItem: function delItem(id, index) {
       axios["delete"]('http://127.0.0.1:8000/api/todos/' + id)["catch"](function (error) {
         console.log(error);
       });
+      this.Nutzdaten.notes.splice(index, 1);
+    },
+    addItem: function addItem() {
+      axios.post('http://127.0.0.1:8000/api/todos', {
+        item: this.newitem
+      }) //ARGUMENTE SETZEN!!!!
+      ["catch"](function (error) {
+        console.log(error);
+      });
+      this.Nutzdaten.notes.push(this.newitem);
     }
   }
 });
@@ -46044,8 +46060,30 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "b-card",
-    { attrs: { title: "To-Dos" } },
+    { staticStyle: { "text-align": "center" }, attrs: { title: "To-Dos" } },
     [
+      _c(
+        "b-input-group",
+        [
+          _c("b-form-input", {
+            staticStyle: { "margin-right": "3px" },
+            attrs: { type: "text" },
+            model: {
+              value: _vm.newitem,
+              callback: function($$v) {
+                _vm.newitem = $$v
+              },
+              expression: "newitem"
+            }
+          }),
+          _vm._v(" "),
+          _c("b-button", { on: { click: _vm.addItem } }, [_vm._v(" -> ")])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
       _c("b-table", {
         attrs: {
           striped: "",
@@ -46063,7 +46101,7 @@ var render = function() {
                   {
                     on: {
                       click: function($event) {
-                        return _vm.delItem(data.item.id)
+                        return _vm.delItem(data.item.id, data.index)
                       }
                     }
                   },

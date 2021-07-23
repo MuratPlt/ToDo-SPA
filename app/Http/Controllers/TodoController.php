@@ -18,4 +18,11 @@ class TodoController extends Controller
 
         return response()->json([], 204);
     }
+
+    public function store($item){
+        echo $item;
+        //$id = DB::select('SELECT LAST_INSERT_ID() FROM notes');
+        //DB::insert('INSERT INTO notes VALUES (' . $id . ', ' . $item . ')');
+        return response()->json(201);
+    }
 }
