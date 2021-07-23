@@ -20,22 +20,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var payload;
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      todo: []
+      Nutzdaten: [],
+      fields: ['todo', 'löschen']
     };
   },
   created: function created() {
     var _this = this;
 
     axios.get('http://127.0.0.1:8000/api/todos/').then(function (response) {
-      console.log(response.data.todos);
-      _this.todo = response.data.todos;
-    })["catch"](function (errors) {
-      console.log(errors);
+      console.log(response.data); // DEBUG
+
+      _this.Nutzdaten = response.data;
+    })["catch"](function (error) {
+      console.log(error);
     });
+  },
+  methods: {
+    delItem: function delItem(id) {
+      axios["delete"]('http://127.0.0.1:8000/api/todos/' + id)["catch"](function (error) {
+        console.log(error);
+      });
+    }
   }
 });
 
@@ -46035,7 +46047,32 @@ var render = function() {
     { attrs: { title: "To-Dos" } },
     [
       _c("b-table", {
-        attrs: { striped: "", "thead-class": "d-none", items: _vm.todo }
+        attrs: {
+          striped: "",
+          "thead-class": "d-none",
+          fields: _vm.fields,
+          items: _vm.Nutzdaten.notes
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "cell(löschen)",
+            fn: function(data) {
+              return [
+                _c(
+                  "b-button",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.delItem(data.item.id)
+                      }
+                    }
+                  },
+                  [_vm._v(" x ")]
+                )
+              ]
+            }
+          }
+        ])
       })
     ],
     1

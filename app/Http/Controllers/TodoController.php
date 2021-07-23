@@ -8,8 +8,14 @@ use Illuminate\Support\Facades\DB;
 class TodoController extends Controller
 {
     public function index(){
-        $Data = DB::select('select todo from notes');
+        $Data = DB::select('select * from notes');
 
-        return response()->json(['todos' => $Data]);
+        return response()->json(['notes' => $Data]);
+    }
+
+    public function delete($id){
+        DB::delete('delete from notes where id =' . $id);
+
+        return response()->json([], 204);
     }
 }
