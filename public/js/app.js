@@ -57,7 +57,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     addItem: function addItem() {
       axios.post('http://127.0.0.1:8000/api/todos', {
-        item: this.newitem
+        todo: this.newitem
       }) //ARGUMENTE SETZEN!!!!
       ["catch"](function (error) {
         console.log(error);

@@ -49,7 +49,7 @@ export default {
             this.Nutzdaten.notes.splice(index, 1);
         },
         addItem (){
-            axios.post('http://127.0.0.1:8000/api/todos', {item: this.newitem})     //ARGUMENTE SETZEN!!!!
+            axios.post('http://127.0.0.1:8000/api/todos', {todo: this.newitem})     //ARGUMENTE SETZEN!!!!
                 .catch((error => {
                     console.log(error);
                 }))

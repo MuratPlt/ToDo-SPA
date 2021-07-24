@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,10 +20,10 @@ class TodoController extends Controller
         return response()->json([], 204);
     }
 
-    public function store($item){
-        echo $item;
-        //$id = DB::select('SELECT LAST_INSERT_ID() FROM notes');
-        //DB::insert('INSERT INTO notes VALUES (' . $id . ', ' . $item . ')');
-        return response()->json(201);
+    public function store(Request $item){
+        $Todo = new Notes();
+        $Todo->id = (int)DB::table('notes')->max('id') + 1;
+        $Todo->todo = $item->todo;
+        $Todo->save();
     }
 }
