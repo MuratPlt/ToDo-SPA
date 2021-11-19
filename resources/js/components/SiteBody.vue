@@ -38,7 +38,6 @@ export default {
                 console.log(error);
             }))
 
-
     },
     methods: {
         delItem (id, index){
@@ -48,12 +47,21 @@ export default {
                  }))
             this.Nutzdaten.notes.splice(index, 1);
         },
-        addItem (){
-            axios.post('http://127.0.0.1:8000/api/todos', {todo: this.newitem})     //ARGUMENTE SETZEN!!!!
+        addItem () {
+            axios.post('http://127.0.0.1:8000/api/todos', {todo: this.newitem})
                 .catch((error => {
                     console.log(error);
                 }))
-            this.Nutzdaten.notes.push(this.newitem);
+
+            axios.get('http://127.0.0.1:8000/api/todos/')
+                .then( response => {
+                    this.Nutzdaten = response.data;
+                })
+                .catch((error => {
+                    console.log(error);
+                }))
+
+            this.newitem = "";
         }
     }
 }

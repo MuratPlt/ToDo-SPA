@@ -26,3 +26,4 @@ Route::delete('todos/{id}',[\App\Http\Controllers\TodoController::class, 'delete
 
 // Todo hinzufügen
 Route::post('todos',[\App\Http\Controllers\TodoController::class, 'store']);
+

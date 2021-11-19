@@ -56,13 +56,19 @@ __webpack_require__.r(__webpack_exports__);
       this.Nutzdaten.notes.splice(index, 1);
     },
     addItem: function addItem() {
+      var _this2 = this;
+
       axios.post('http://127.0.0.1:8000/api/todos', {
         todo: this.newitem
-      }) //ARGUMENTE SETZEN!!!!
-      ["catch"](function (error) {
+      })["catch"](function (error) {
         console.log(error);
       });
-      this.Nutzdaten.notes.push(this.newitem);
+      axios.get('http://127.0.0.1:8000/api/todos/').then(function (response) {
+        _this2.Nutzdaten = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      this.newitem = "";
     }
   }
 });
