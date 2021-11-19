@@ -3,7 +3,7 @@
     <b-card title="To-Dos" style="text-align: center">
         <b-input-group>
             <b-form-input type="text" v-model="newitem" style="margin-right: 3px"></b-form-input>
-            <b-button @click="addItem"> -> </b-button>
+            <b-button @click="addItem"> Hinzufügen </b-button>
         </b-input-group>
 
         <br>
@@ -67,6 +67,6 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+@import "../../sass/app.scss";
 </style>

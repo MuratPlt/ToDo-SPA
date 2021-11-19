@@ -11,8 +11,11 @@
     </head>
 
     <body>
-        <div id="app" class="d-flex justify-content-center">
-            <site-body></site-body>
+        <div id="app">
+            <site-header></site-header>
+            <div class="d-flex justify-content-center">
+                <site-body></site-body>
+            </div>
         </div>
     </body>
 

@@ -11,6 +11,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 Vue.component('siteBody',require('./components/SiteBody.vue').default);
+Vue.component('siteHeader',require('./components/SiteHeader.vue').default);
 
 const app = new Vue({
     el: '#app',
